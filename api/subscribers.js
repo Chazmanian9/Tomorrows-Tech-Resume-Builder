@@ -21,15 +21,7 @@ export default async function handler(req, res) {
   const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
-    return res.status(500).json({ 
-      error: 'Server configuration error.',
-      debug: {
-        hasUrl: !!supabaseUrl,
-        hasKey: !!supabaseKey,
-        urlStartsWith: supabaseUrl ? supabaseUrl.substring(0, 8) : 'MISSING',
-        keyStartsWith: supabaseKey ? supabaseKey.substring(0, 10) : 'MISSING'
-      }
-    });
+    return res.status(500).json({ error: 'Server configuration error.' });
   }
 
   try {
@@ -48,7 +40,6 @@ export default async function handler(req, res) {
     const data = await response.json();
     return res.status(200).json({ success: true, count: data.length, subscribers: data });
   } catch (err) {
-    console.error('Fetch error:', err);
     return res.status(500).json({ error: 'Something went wrong.' });
   }
 }
