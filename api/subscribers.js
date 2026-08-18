@@ -21,7 +21,15 @@ export default async function handler(req, res) {
   const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
-    return res.status(500).json({ error: 'Server configuration error.' });
+    return res.status(500).json({ 
+      error: 'Server configuration error.',
+      debug: {
+        hasUrl: !!supabaseUrl,
+        hasKey: !!supabaseKey,
+        urlStartsWith: supabaseUrl ? supabaseUrl.substring(0, 8) : 'MISSING',
+        keyStartsWith: supabaseKey ? supabaseKey.substring(0, 10) : 'MISSING'
+      }
+    });
   }
 
   try {
