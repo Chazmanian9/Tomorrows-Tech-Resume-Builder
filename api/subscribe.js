@@ -16,15 +16,7 @@ export default async function handler(req, res) {
   const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
 
   if (!supabaseUrl || !supabaseKey) {
-    return res.status(500).json({ 
-      error: 'Server configuration error.',
-      debug: {
-        hasUrl: !!supabaseUrl,
-        hasKey: !!supabaseKey,
-        urlStartsWith: supabaseUrl ? supabaseUrl.substring(0, 8) : 'MISSING',
-        keyStartsWith: supabaseKey ? supabaseKey.substring(0, 10) : 'MISSING'
-      }
-    });
+    return res.status(500).json({ error: 'Server configuration error.' });
   }
 
   try {
@@ -43,14 +35,11 @@ export default async function handler(req, res) {
       if (response.status === 409) {
         return res.status(200).json({ success: true, message: "You're already subscribed!" });
       }
-      const errText = await response.text();
-      console.error('Supabase error:', errText);
       return res.status(500).json({ error: 'Could not save your email. Please try again.' });
     }
 
     return res.status(200).json({ success: true, message: "You're subscribed! 🎉" });
   } catch (err) {
-    console.error('Subscribe error:', err);
     return res.status(500).json({ error: 'Something went wrong. Please try again.' });
   }
 }
