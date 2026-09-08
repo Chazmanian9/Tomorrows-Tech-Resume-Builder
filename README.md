@@ -1,4 +1,4 @@
-# FC Consulting Resume Builder
+# GFC Consulting Group Resume Builder
 
 A free, browser-based AI resume builder with 3 professional templates. No signup, no watermark, instant PDF download.
 
@@ -30,4 +30,4 @@ A free, browser-based AI resume builder with 3 professional templates. No signup
 
 ## License
 
-Free to use. Produced by FC Consulting.
+Free to use. Produced by GFC Consulting Group.
