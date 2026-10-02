@@ -719,98 +719,7 @@
             border-radius: 20px;
             font-size: 9px;
             font-weight: 600;
-        }
-
-/* SUBSCRIBE SECTION */
-        .subscribe-section {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 30px 20px;
-            text-align: center;
-            background: linear-gradient(135deg, #0A1F3C 0%, #142B50 100%);
-            border-radius: 12px;
-            margin-bottom: 30px;
-        }
-
-        .subscribe-section h3 {
-            color: #fff;
-            font-size: 1.1rem;
-            margin-bottom: 6px;
-        }
-
-        .subscribe-section p {
-            color: #AAB3E6;
-            font-size: 0.85rem;
-            margin-bottom: 16px;
-        }
-
-        .subscribe-form {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .subscribe-form input {
-            flex: 1;
-            min-width: 200px;
-            padding: 10px 14px;
-            border: 1px solid #2878DC;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            background: #fff;
-            color: #333;
-        }
-
-        .subscribe-form input:focus {
-            outline: none;
-            border-color: #2878DC;
-            box-shadow: 0 0 0 2px rgba(40, 120, 220, 0.2);
-        }
-
-        .subscribe-form button {
-            padding: 10px 22px;
-            background: #2878DC;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .subscribe-form button:hover {
-            background: #1a5bb3;
-        }
-
-        .subscribe-form button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .subscribe-msg {
-            margin-top: 10px;
-            font-size: 0.85rem;
-            min-height: 20px;
-        }
-
-        .subscribe-msg.success {
-            color: #4ade80;
-        }
-
-        .subscribe-msg.error {
-            color: #f87171;
-        }
-
-        .subscribe-fine-print {
-            font-size: 0.7rem;
-            color: #AAB3E6;
-            opacity: 0.6;
-            margin-top: 8px;
-        }
-
-/* FC CONSULTING FOOTER */
+        }/* FC CONSULTING FOOTER */
         .fc-footer {
             text-align: center;
             margin-top: 20px;
@@ -1061,18 +970,6 @@
             <p>Generating your PDF...</p>
         </div>
     </div>
-</div>
-
-<!-- EMAIL SUBSCRIBE (optional) -->
-<div class="subscribe-section">
-    <h3>Get Free AI Career Tips</h3>
-    <p>Join our newsletter for resume tips, AI tools, and career insights. No spam, unsubscribe anytime.</p>
-    <form class="subscribe-form" id="subscribeForm" onsubmit="handleSubscribe(event)">
-        <input type="email" id="subscribeEmail" placeholder="your@email.com" required>
-        <button type="submit" id="subscribeBtn">Subscribe</button>
-    </form>
-    <div class="subscribe-msg" id="subscribeMsg"></div>
-    <p class="subscribe-fine-print">Optional — you can use the resume builder without subscribing.</p>
 </div>
 
 <script>
@@ -1884,42 +1781,6 @@ function toggleMobile(panel) {
 addWorkExperience();
 addEducation();
 updatePreview();
-// Handle email subscription
-async function handleSubscribe(e) {
-    e.preventDefault();
-    const email = document.getElementById('subscribeEmail').value;
-    const btn = document.getElementById('subscribeBtn');
-    const msg = document.getElementById('subscribeMsg');
-    
-    btn.disabled = true;
-    btn.textContent = 'Subscribing...';
-    msg.className = 'subscribe-msg';
-    msg.textContent = '';
-
-    try {
-        const res = await fetch('/api/subscribe', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
-        });
-        const data = await res.json();
-        
-        if (data.success) {
-            msg.className = 'subscribe-msg success';
-            msg.textContent = data.message || "You're subscribed! \u{1F389}";
-            document.getElementById('subscribeEmail').value = '';
-        } else {
-            msg.className = 'subscribe-msg error';
-            msg.textContent = data.error || 'Something went wrong.';
-        }
-    } catch (err) {
-        msg.className = 'subscribe-msg error';
-        msg.textContent = 'Network error. Please try again.';
-    }
-    
-    btn.disabled = false;
-    btn.textContent = 'Subscribe';
-}
 
 </script>
 
